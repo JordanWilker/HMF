@@ -34,11 +34,5 @@ Cycle.virtual('creator', {
   foreignField: '_id',
   justOne: true
 })
-Cycle.virtual('year', {
-  localField: 'year',
-  ref: 'Years',
-  foreignField: 'year',
-  justOne: true
-})
 
 export default Cycle
