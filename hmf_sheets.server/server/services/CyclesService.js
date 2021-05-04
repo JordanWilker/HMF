@@ -32,7 +32,7 @@ class CyclesService {
   }
 
   async getCycleById(id) {
-    return await dbContext.Cycles.findOne({ _id: id }).populate('year')
+    return await dbContext.Cycles.findOne({ _id: id }).populate('yearId')
   }
 
   async editCycle(id, userId, body) {

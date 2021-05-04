@@ -5,7 +5,7 @@ const Cycle = new Schema(
   {
     name: { type: String, required: true },
     creatorId: { type: String, ref: 'Account', required: true },
-    year: { type: String, ref: 'Years', required: true },
+    yearId: { type: String, ref: 'Year', required: true },
     philRequestedAmount: { type: Number, required: true, default: 0 },
     totalRPC: { type: Number, required: true, default: 0 },
     totalAPC: { type: Number, required: true, default: 0 },
@@ -31,6 +31,12 @@ const Cycle = new Schema(
 Cycle.virtual('creator', {
   localField: 'creatorId',
   ref: 'Account',
+  foreignField: '_id',
+  justOne: true
+})
+Cycle.virtual('creator', {
+  localField: 'yearId',
+  ref: 'Year',
   foreignField: '_id',
   justOne: true
 })

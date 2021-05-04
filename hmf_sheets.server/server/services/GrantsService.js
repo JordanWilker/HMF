@@ -24,7 +24,7 @@ class GrantsService {
   }
 
   async getGrantById(id) {
-    return await dbContext.Grants.findOne({ _id: id })
+    return await dbContext.Grants.findOne({ _id: id }).populate('cycleId yearPaidId')
   }
 
   async editGrant(id, userId, body) {
