@@ -1,4 +1,5 @@
 import { dbContext } from '../db/DbContext'
+import Grant from '../models/Grant'
 // import { BadRequest } from '../utils/Errors'
 
 class YearsService {
@@ -21,6 +22,13 @@ class YearsService {
 
   async editYear(id, userId, body) {
     return await dbContext.Years.findByIdAndUpdate({ _id: id, creatorId: userId }, body, { new: true })
+  }
+
+  async updateYear(id) {
+    const data = await dbContext.Grants.find({ yearPaidId: id })
+    for (const amountPaid in data) {
+      console.log(amountPaid)
+    }
   }
 }
 

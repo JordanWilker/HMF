@@ -12,6 +12,7 @@ export class YearsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createYear)
       .delete('/:id', this.deleteYear)
+      .put('/update/:id')
       .put('/:id', this.editYear)
   }
 
@@ -48,6 +49,14 @@ export class YearsController extends BaseController {
   async editYear(req, res, next) {
     try {
       return res.send(await yearsService.editYear(req.params.id, req.userInfo, req.body))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async updateYear(req, res, next) {
+    try {
+      return res.send(await yearsService.updateYear(req.params.id))
     } catch (error) {
       next(error)
     }
