@@ -1,6 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
-import { logger } from '../utils/Logger'
+// import { logger } from '../utils/Logger'
 
 class CyclesService {
   async getCycles() {
