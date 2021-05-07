@@ -6,9 +6,9 @@ const Cycle = new Schema(
     name: { type: String, required: true },
     creatorId: { type: String, ref: 'Account', required: true },
     yearId: { type: String, ref: 'Year', required: true },
-    philRequestedAmount: { type: Number, required: true, default: 0 },
     totalRPC: { type: Number, required: true, default: 0 },
     totalAPC: { type: Number, required: true, default: 0 },
+    philRequestedAmount: { type: Number, required: true, default: 0 },
     philApprovedAmount: { type: Number, required: true, default: 0 },
     philPaidAmount: { type: Number, required: true, default: 0 },
     operaRequestedAmount: { type: Number, required: true, default: 0 },
@@ -20,9 +20,9 @@ const Cycle = new Schema(
     chordsRequestedAmount: { type: Number, required: true, default: 0 },
     chordsApprovedAmount: { type: Number, required: true, default: 0 },
     chordsPaidAmount: { type: Number, required: true, default: 0 },
-    amountPaidYearOne: { type: String, required: true, default: 0 },
-    amountPaidYearTwo: { type: String, required: true, default: 0 },
-    amountPaidYearThree: { type: String, required: true, default: 0 }
+    amountPaidYearOne: { type: Number, required: true, default: 0 },
+    amountPaidYearTwo: { type: Number, required: true, default: 0 },
+    amountPaidYearThree: { type: Number, required: true, default: 0 }
 
   },
   { timestamps: true, toJSON: { virtuals: true } }

@@ -13,6 +13,8 @@ export class CyclesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createCycle)
       .delete('/:id', this.deleteCycle)
+      .put('/updateRPC/:id', this.updateRPC)
+      .put('/updateAPC/:id', this.updateAPC)
       .put('/:id', this.editCycle)
   }
 
@@ -53,6 +55,22 @@ export class CyclesController extends BaseController {
   async editCycle(req, res, next) {
     try {
       return res.send(await cyclesService.editCycle(req.params.id, req.userInfo, req.body))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async updateRPC(req, res, next) {
+    try {
+      return res.send(await cyclesService.updateRPC(req.params.id))
+    } catch (error) {
+      next(error)
+    }
+  }
+
+  async updateAPC(req, res, next) {
+    try {
+      return res.send(await cyclesService.updateAPC(req.params.id))
     } catch (error) {
       next(error)
     }

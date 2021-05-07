@@ -12,7 +12,7 @@ export class YearsController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createYear)
       .delete('/:id', this.deleteYear)
-      .put('/update/:id')
+      .put('/update/:id', this.updateYear)
       .put('/:id', this.editYear)
   }
 

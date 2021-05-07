@@ -1,5 +1,6 @@
 import { dbContext } from '../db/DbContext'
 import { BadRequest } from '../utils/Errors'
+import { logger } from '../utils/Logger'
 
 class CyclesService {
   async getCycles() {
@@ -37,6 +38,32 @@ class CyclesService {
 
   async editCycle(id, userId, body) {
     return await dbContext.Cycles.findByIdAndUpdate({ _id: id, creatorId: userId }, body, { new: true })
+  }
+
+  async updateRPC(id) {
+    const grants = await dbContext.Grants.find({ cycleId: id })
+    const cycle = await dbContext.Cycles.findOne({ _id: id })
+    cycle.totalRPC = 0
+    for (const key of grants) {
+      logger.log(key.totalRPC)
+      cycle.totalRPC = cycle.totalRPC + key.requestedAmount
+    }
+    cycle.markModified('totalRPC')
+    await cycle.save()
+    return cycle
+  }
+
+  async updateAPC(id) {
+    const grants = await dbContext.Grants.find({ cycleId: id })
+    const cycle = await dbContext.Cycles.findOne({ _id: id })
+    cycle.totalAPC = 0
+    for (const key of grants) {
+      logger.log(key.totalRPC)
+      cycle.totalAPC = cycle.totalAPC + key.approvedAmount
+    }
+    cycle.markModified('totalAPC')
+    await cycle.save()
+    return cycle
   }
 }
 

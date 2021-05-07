@@ -1,6 +1,7 @@
 import { dbContext } from '../db/DbContext'
-import Grant from '../models/Grant'
+// import Grant from '../models/Grant'
 // import { BadRequest } from '../utils/Errors'
+import { logger } from '../utils/Logger'
 
 class YearsService {
   async getYears() {
@@ -25,10 +26,17 @@ class YearsService {
   }
 
   async updateYear(id) {
-    const data = await dbContext.Grants.find({ yearPaidId: id })
-    for (const amountPaid in data) {
-      console.log(amountPaid)
+    const dataGrants = await dbContext.Grants.find({ yearPaidId: id })
+    const dataYear = await dbContext.Years.findOne({ _id: id })
+    dataYear.totalPaid = 0
+    dataYear.quarterPool = dataYear.approvedPool / 4
+    for (const key of dataGrants) {
+      logger.log(key.amountPaid)
+      dataYear.totalPaid = dataYear.totalPaid + key.amountPaid
     }
+    dataYear.markModified('totalPaid quarterPool')
+    await dataYear.save()
+    return dataYear
   }
 }
 

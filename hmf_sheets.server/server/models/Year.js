@@ -4,7 +4,7 @@ const Schema = mongoose.Schema
 const Year = new Schema(
   {
     creatorId: { type: String, ref: 'Account', required: true },
-    year: { type: String, required: true },
+    year: { type: Number, required: true },
     approvedPool: { type: Number, required: true, default: 0 },
     quarterPool: { type: Number, required: true, default: 0 },
     philRequestedAmount: { type: Number, required: true, default: 0 },
@@ -19,7 +19,7 @@ const Year = new Schema(
     chordsRequestedAmount: { type: Number, required: true, default: 0 },
     chordsApprovedAmount: { type: Number, required: true, default: 0 },
     chordsPaidAmount: { type: Number, required: true, default: 0 },
-    totalPaid: { type: String, required: true, default: 0 }
+    totalPaid: { type: Number, required: true, default: 0 }
 
   },
   { timestamps: true, toJSON: { virtuals: true } }
