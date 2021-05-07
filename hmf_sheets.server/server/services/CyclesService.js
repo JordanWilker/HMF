@@ -40,28 +40,32 @@ class CyclesService {
     return await dbContext.Cycles.findByIdAndUpdate({ _id: id, creatorId: userId }, body, { new: true })
   }
 
-  async updateRPC(id) {
+  async updatePC(id) {
     const grants = await dbContext.Grants.find({ cycleId: id })
     const cycle = await dbContext.Cycles.findOne({ _id: id })
+    const year1 = await dbContext.Years.findOne({ _id: cycle.yearId })
+    const grantsYear1 = await dbContext.Grants.find({ yearPaid: year1.year })
+    const grantsYear2 = await dbContext.Grants.find({ yearPaid: year1.year + 1 })
+    const grantsYear3 = await dbContext.Grants.find({ yearPaid: year1.year + 2 })
     cycle.totalRPC = 0
-    for (const key of grants) {
-      logger.log(key.totalRPC)
-      cycle.totalRPC = cycle.totalRPC + key.requestedAmount
-    }
-    cycle.markModified('totalRPC')
-    await cycle.save()
-    return cycle
-  }
-
-  async updateAPC(id) {
-    const grants = await dbContext.Grants.find({ cycleId: id })
-    const cycle = await dbContext.Cycles.findOne({ _id: id })
     cycle.totalAPC = 0
+    cycle.amountPaidYearOne = 0
+    cycle.amountPaidYearTwo = 0
+    cycle.amountPaidYearThree = 0
     for (const key of grants) {
-      logger.log(key.totalRPC)
+      cycle.totalRPC = cycle.totalRPC + key.requestedAmount
       cycle.totalAPC = cycle.totalAPC + key.approvedAmount
     }
-    cycle.markModified('totalAPC')
+    for (const key of grantsYear1) {
+      cycle.amountPaidYearOne = cycle.amountPaidYearOne + key.amountPaid
+    }
+    for (const key of grantsYear2) {
+      cycle.amountPaidYearTwo = cycle.amountPaidYearTwo + key.amountPaid
+    }
+    for (const key of grantsYear3) {
+      cycle.amountPaidYearThree = cycle.amountPaidYearThree + key.amountPaid
+    }
+    cycle.markModified('totalRPC totalAPC amountPaidYearOne amountPaidYearTwo amountPaidYearThree')
     await cycle.save()
     return cycle
   }

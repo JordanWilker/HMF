@@ -14,8 +14,8 @@ const Grant = new Schema(
     approvedAmount: { type: Number, required: true, default: 0 },
     datePaid: { type: String, required: true, default: 0 },
     amountPaid: { type: Number, required: true, default: 0 },
-    yearPaidId: { type: String, ref: 'Year', required: true, default: 0 }
-
+    yearPaidId: { type: String, ref: 'Year', required: true, default: 0 },
+    yearPaid: { type: Number, required: true, default: 0 }
   },
   { timestamps: true, toJSON: { virtuals: true } }
 )

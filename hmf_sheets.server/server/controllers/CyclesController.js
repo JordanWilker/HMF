@@ -13,8 +13,7 @@ export class CyclesController extends BaseController {
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createCycle)
       .delete('/:id', this.deleteCycle)
-      .put('/updateRPC/:id', this.updateRPC)
-      .put('/updateAPC/:id', this.updateAPC)
+      .put('/updatePC/:id', this.updatePC)
       .put('/:id', this.editCycle)
   }
 
@@ -60,17 +59,9 @@ export class CyclesController extends BaseController {
     }
   }
 
-  async updateRPC(req, res, next) {
+  async updatePC(req, res, next) {
     try {
-      return res.send(await cyclesService.updateRPC(req.params.id))
-    } catch (error) {
-      next(error)
-    }
-  }
-
-  async updateAPC(req, res, next) {
-    try {
-      return res.send(await cyclesService.updateAPC(req.params.id))
+      return res.send(await cyclesService.updatePC(req.params.id))
     } catch (error) {
       next(error)
     }
