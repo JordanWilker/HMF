@@ -44,7 +44,7 @@ class YearsService {
       dataYear.balletPaidAmount = dataYear.balletPaidAmount + key.balletPaidAmount
       dataYear.chordsPaidAmount = dataYear.chordsPaidAmount + key.chordsPaidAmount
     }
-    dataYear.markModified('totalPaid quarterPool')
+    dataYear.markModified('totalPaid quarterPool philPaidAmount operaPaidAmount balletPaidAmount chordsPaidAmount')
     await dataYear.save()
     return dataYear
   }
