@@ -1,13 +1,12 @@
 <template>
   <div class="Grants">
     HOWDY HOW GOES IT PARDNER
-    {{ grants.name }}
+    {{ grants.group }}
   </div>
 </template>
 
 <script>
-import { computed, reactive } from 'vue'
-import { AppState } from '../AppState'
+import { Grant } from '../models/Grant'
 export default {
   name: 'Grants',
   props: {
@@ -15,14 +14,7 @@ export default {
       type: Object,
       default: () => new Grant()
     }
-  },
-  setup() {
-    const state = reactive({
-      grants: computed(() => AppState.grants)
-    })
-    return { state }
-  },
-  components: {}
+  }
 }
 </script>
 
