@@ -1,23 +1,23 @@
 <template>
   <div class="component">
-    <Grants v-for="grants in state.grants" :key="grants.id" :grants="grants" />
+    {{ state.grant.group }}
   </div>
 </template>
 
 <script>
 import { computed, onMounted, reactive } from 'vue'
 import { grantsService } from '../services/GrantsService'
-import { AppState } from '../AppState'
 import { useRoute } from 'vue-router'
+import { AppState } from '../AppState'
 export default {
   name: 'Component',
   setup() {
     const route = useRoute()
     onMounted(() => {
-      grantsService.getGrantsByYear(route.params.id)
+      grantsService.getGrantById(route.params.id)
     })
     const state = reactive({
-      grants: computed(() => AppState.grants)
+      grant: computed(() => AppState.activeGrant)
     })
     return { state }
   },

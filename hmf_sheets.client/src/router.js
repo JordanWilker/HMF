@@ -23,9 +23,15 @@ const routes = [
     beforeEnter: authGuard
   },
   {
-    path: '/year/:id',
+    path: '/year/:id/grants',
     name: 'GrantsByYear',
     component: loadPage('GrantsByYearPage'),
+    beforeEnter: authGuard
+  },
+  {
+    path: '/grant/:id',
+    name: 'GrantInfo',
+    component: loadPage('GrantInfoPage'),
     beforeEnter: authGuard
   }
 ]

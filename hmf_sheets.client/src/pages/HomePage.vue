@@ -1,5 +1,5 @@
 <template>
-  <Grants v-for="grants in state.grants" :key="grants.id" :grants="grants" />
+  <!-- <Grants v-for="grants in state.grants" :key="grants.id" :grants="grants" /> -->
   <p>Sort By Year</p>
   <Years v-for="years in state.years" :key="years.id" :years="years" />
 </template>
