@@ -1,6 +1,8 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { yearsService } from '../services/YearsService'
+import { grantsService } from '../services/GrantsService'
+import { cyclesService } from '../services/CyclesService'
 
 export class YearsController extends BaseController {
   constructor() {
@@ -14,6 +16,8 @@ export class YearsController extends BaseController {
       .delete('/:id', this.deleteYear)
       .put('/update/:id', this.updateYear)
       .put('/:id', this.editYear)
+      .get('/:id/grants', this.getGrantsByYear)
+      .get('/:id/cycles', this.getCyclesByYear)
   }
 
   async getAll(req, res, next) {
@@ -26,6 +30,10 @@ export class YearsController extends BaseController {
 
   async getYearById(req, res, next) {
     return res.send(await yearsService.getYearById(req.params.id))
+  }
+
+  async getCyclesByYear(req, res, next) {
+    return res.send(await cyclesService.getCyclesByYear(req.params.id))
   }
 
   async createYear(req, res, next) {
@@ -60,5 +68,9 @@ export class YearsController extends BaseController {
     } catch (error) {
       next(error)
     }
+  }
+
+  async getGrantsByYear(req, res, next) {
+    return res.send(await grantsService.getGrantsByYear(req.params.id))
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <div class="Years">
-    <router-link :to="{name: GrantsByYear, params: {id: years.id}}">
+    <router-link :to="{name: 'GrantsByYear', params: {id: years.id}}">
       <div class="card" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title">

@@ -8,8 +8,6 @@ export class GrantsController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getGrantById)
-      .get('/year/:year', this.getGrantsByYear)
-      .get('/cycle/:id', this.getGrantsByCycle)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createGrant)
@@ -27,14 +25,6 @@ export class GrantsController extends BaseController {
 
   async getGrantById(req, res, next) {
     return res.send(await grantsService.getGrantById(req.params.id))
-  }
-
-  async getGrantsByYear(req, res, next) {
-    return res.send(await grantsService.getGrantsByYear(req.params.year))
-  }
-
-  async getGrantsByCycle(req, res, next) {
-    return res.send(await grantsService.getGrantsByCycle(req.params.id))
   }
 
   async createGrant(req, res, next) {

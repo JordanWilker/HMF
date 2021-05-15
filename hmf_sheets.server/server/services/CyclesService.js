@@ -17,7 +17,7 @@ class CyclesService {
   }
 
   async getCyclesByYear(id) {
-    const cycle = await dbContext.Cycles.find({ year: id })
+    const cycle = await dbContext.Cycles.find({ yearId: id })
     if (!cycle) {
       throw new BadRequest('Invalid Year')
     }

@@ -8,7 +8,7 @@ class GrantsService {
   }
 
   async getGrantsByYear(id) {
-    const grant = await dbContext.Grants.find({ yearPaid: id })
+    const grant = await dbContext.Grants.find({ yearMadeId: id })
     if (!grant) {
       throw new BadRequest('Invalid Year')
     }

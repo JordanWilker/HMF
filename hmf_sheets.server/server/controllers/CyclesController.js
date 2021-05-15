@@ -1,6 +1,7 @@
 import BaseController from '../utils/BaseController'
 import { Auth0Provider } from '@bcwdev/auth0provider'
 import { cyclesService } from '../services/CyclesService'
+import { grantsService } from '../services/GrantsService'
 
 export class CyclesController extends BaseController {
   constructor() {
@@ -8,7 +9,7 @@ export class CyclesController extends BaseController {
     this.router
       .get('', this.getAll)
       .get('/:id', this.getCycleById)
-      .get('/year/:year', this.getCyclesByYear)
+      .get('/:id/grants', this.getGrantsByCycle)
       // NOTE: Beyond this point all routes require Authorization tokens (the user must be logged in)
       .use(Auth0Provider.getAuthorizedUserInfo)
       .post('', this.createCycle)
@@ -29,8 +30,12 @@ export class CyclesController extends BaseController {
     return res.send(await cyclesService.getCycleById(req.params.id))
   }
 
+  async getGrantsByCycle(req, res, next) {
+    return res.send(await grantsService.getGrantsByCycle(req.params.id))
+  }
+
   async getCyclesByYear(req, res, next) {
-    return res.send(await cyclesService.getCyclesByYear(req.params.year))
+    return res.send(await cyclesService.getCyclesByYear(req.params.id))
   }
 
   async createCycle(req, res, next) {

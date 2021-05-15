@@ -4,6 +4,7 @@ const Schema = mongoose.Schema
 const Grant = new Schema(
   {
     group: { type: String, required: true },
+    yearMadeId: { type: String, required: true },
     creatorId: { type: String, ref: 'Account', required: true },
     cycleId: { type: String, ref: 'Cycle', required: true },
     datePerformed: { type: String, required: true },

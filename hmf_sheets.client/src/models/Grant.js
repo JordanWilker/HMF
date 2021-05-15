@@ -2,6 +2,7 @@ export class Grant {
   constructor(data = {}) {
     this.id = data.id || data._id || 'placeholder id'
     this.group = data.group || 'test group'
+    this.yearMadeId = data.yearMadeId
     this.cycleId = data.cycleId || 'b'
     this.datePerformed = data.datePerformed
     this.irsId = data.irsId
