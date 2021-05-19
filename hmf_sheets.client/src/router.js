@@ -33,6 +33,12 @@ const routes = [
     name: 'GrantInfo',
     component: loadPage('GrantInfoPage'),
     beforeEnter: authGuard
+  },
+  {
+    path: '/cycle/:id/grants',
+    name: 'GrantsByCycle',
+    component: loadPage('GrantsByCyclePage'),
+    beforeEnter: authGuard
   }
 ]
 

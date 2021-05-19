@@ -19,5 +19,10 @@ class GrantsService {
     const res = await api.get(`api/grants/${id}`)
     AppState.activeGrant = new Grant(res.data)
   }
+
+  async getGrantsByCycle(id) {
+    const res = await api.get(`api/cycles/${id}/grants`)
+    AppState.grants = res.data.map(d => new Grant(d))
+  }
 }
 export const grantsService = new GrantsService()
